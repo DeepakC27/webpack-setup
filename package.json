@@ -1,7 +1,7 @@
 {
-  "name": "portfolio",
+  "name": "Savings Web",
   "version": "1.0.0",
-  "description": "Portfolio boiler plate",
+  "description": "Savings web app",
   "private": true,
   "scripts": {
   },
@@ -10,5 +10,8 @@
   "dependencies": {
   },
   "devDependencies": {
+    "live-server": "^1.2.1",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }
