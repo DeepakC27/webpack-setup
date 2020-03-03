@@ -1,13 +1,19 @@
 // import App from './app'
 // const App = require('./app')
+const root = document.createElement('div')
+root.innerHTML = 'Content elements entry point ok'
+document.body.appendChild(root)
 
-class TestinApp {
-  renderEle () {
-    const root = document.createElement('div')
-    root.innerHTML = 'Content elements entry point ok'
-    document.body.appendChild(root)
-  }
+
+renderEle = () => {
+  const ar = [1, 2, 3, 4]
+  const arTag = document.createElement('ul')
+  ar.map(data => {
+    let nestTag = document.createElement('li')
+    nestTag.innerHTML = data
+    arTag.appendChild(nestTag)
+  })
+  root.appendChild(arTag)
 }
 
-const appObj = new TestinApp()
-appObj.renderEle()
+renderEle()
