@@ -2,7 +2,6 @@ const root = document.createElement('div')
 root.innerHTML = 'Content elements entry point ok'
 document.body.appendChild(root)
 
-
 const renderEle = () => {
   const ar = [1, 2, 3, 4]
   const arTag = document.createElement('ul')
@@ -14,4 +13,10 @@ const renderEle = () => {
   root.appendChild(arTag)
 }
 
-renderEle()
+(() => (
+  new Promise(resolve => {
+    setTimeout(() => {
+      resolve(renderEle())
+    }, 2000)
+  })
+))()
