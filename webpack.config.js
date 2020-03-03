@@ -1,11 +1,25 @@
-const path = require('path');
+const path = require('path')
 
 const config = {
   entry: './src/index.js',
   output: {
-    // path: path.resolve(__dirname, 'public'),
-    path: '/Users/servify/Documents/React_Projects/portfolio/public/'
+    path: path.resolve(__dirname, 'public'),
     filename: '[name].js'
+  },
+  mode: process.env.MODE || "none",
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: ['@babel/plugin-transform-arrow-functions']
+          }
+        }
+      }
+    ]
   }
 }
 
