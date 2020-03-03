@@ -4,8 +4,8 @@
   "description": "Savings web app",
   "private": true,
   "scripts": {
-    "start": "babel src/index.js  --out-file=public/main.js --watch",
-    "start:dev": "babel src/index.js  --out-file=public/main.js --source-maps --watch",
+    "start:babel": "babel src/index.js  --out-file=public/main.js --watch",
+    "start:babel:dev": "babel src/index.js  --out-file=public/main.js --source-maps --watch",
     "build": "webpack --config webpack.config.js"
   },
   "author": "Deepak",
