@@ -1,10 +1,8 @@
-// import App from './app'
-// const App = require('./app')
 const root = document.createElement('div');
 root.innerHTML = 'Content elements entry point ok';
 document.body.appendChild(root);
 
-renderEle = function () {
+const renderEle = function () {
   const ar = [1, 2, 3, 4];
   const arTag = document.createElement('ul');
   ar.map(function (data) {
