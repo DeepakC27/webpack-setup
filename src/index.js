@@ -1,5 +1,10 @@
+import App from './App'
+
 const root = document.createElement('div')
-root.innerHTML = 'Content elements entry point ok'
+root.innerHTML = 'Content elements entry point'
+const appObj = new App(10)
+let currentAmount = appObj.addMoney(5)
+root.innerHTML += ('<br/> profit ' + currentAmount)
 document.body.appendChild(root)
 
 const renderEle = () => {
@@ -17,6 +22,6 @@ const renderEle = () => {
   new Promise(resolve => {
     setTimeout(() => {
       resolve(renderEle())
-    }, 2000)
+    }, 1500)
   })
 ))()
