@@ -9,7 +9,10 @@ const devConfig = {
   mode: "development",
   devServer: {
     // serve path on dev server
-    contentBase: path.resolve(__curDir, 'public')
+    contentBase: path.resolve(__curDir, 'public'),
+    historyApiFallback: {
+      index: path.resolve(__curDir, 'public/index.html')
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -23,7 +26,8 @@ const prodConfig = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__curDir, 'dist'),
-    filename: 'js/name.[hash].js'
+    filename: 'js/name.[contenthash].js',
+    chunkFilename: 'js/name.[contenthash].js' // determines the name of non-entry chunk files
   },
   mode: "production",
   plugins: [
@@ -34,9 +38,11 @@ const prodConfig = {
 }
 
 const config = {
+  // entry: './src/index.js',,
   resolve: {
     alias: {
       // alias for assets path 'assets/[].png'
+      source: path.resolve(__curDir, 'src/'),
       assets: path.resolve(__curDir, 'src/assets/')
     }
   },
@@ -44,9 +50,9 @@ const config = {
 }
 
 module.exports = (() => {
-  if (process.env.MODE === 'dev') {
-    return { ...config, ...devConfig }
-  } else {
+  if (process.env.MODE === 'prod') {
     return { ...config, ...prodConfig }
+  } else {
+    return { ...config, ...devConfig }
   }
 })()

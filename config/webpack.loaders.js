@@ -1,7 +1,12 @@
+const path = require('path')
+const fs = require('fs')
+const __curDir = fs.realpathSync(process.cwd())
+
 const loadersConfig = {
   rules: [
     {
       test: /\.js$/,
+      // includes: path.resolve(__curDir, 'src'), // transpile only src files
       use: {
         loader: 'babel-loader',
         options: {
