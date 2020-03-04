@@ -34,6 +34,12 @@ const prodConfig = {
 }
 
 const config = {
+  resolve: {
+    alias: {
+      // alias for assets path 'assets/[].png'
+      assets: path.resolve(__curDir, 'src/assets/')
+    }
+  },
   module: loadersConfig
 }
 
