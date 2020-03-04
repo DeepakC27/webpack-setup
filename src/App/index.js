@@ -1,3 +1,5 @@
+import bike from 'assets/bike.png'
+import './app.scss'
 
 export default class App {
   constructor (initalMoney = 0) {
@@ -6,6 +8,11 @@ export default class App {
     this.profit = 0
   }
 
+  setImage = (ele) => {
+    const img = document.createElement('img')
+    img.src = bike
+    ele.appendChild(img)
+  }
 
   setProfit = () => {
     this.profit = this.currentAmount - this.initalMoney

@@ -5,6 +5,7 @@ root.innerHTML = 'Content elements entry point'
 const appObj = new App(10)
 let currentAmount = appObj.addMoney(5)
 root.innerHTML += ('<br/> profit ' + currentAmount)
+appObj.setImage(root)
 document.body.appendChild(root)
 
 const renderEle = () => {
