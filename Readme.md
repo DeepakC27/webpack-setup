@@ -4,7 +4,7 @@ Things to be covered
 
   - Transpiling js using babel
   - Setting up webpack
-  - Webpack config to get it working with plan js
+  - Webpack config to get it working with plain js
   - Codespliting & Lazy loading
   - Chunks
   - Adding react to the repo
