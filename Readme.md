@@ -4,11 +4,9 @@ Things to be covered
 
   - Transpiling js using babel
   - Setting up webpack
-  - Webpack config to get it working with plain js
+  - Webpack config to get it working with vanilla js
   - Codespliting & Lazy loading
   - Chunks
-  - Adding react to the repo
-  -
 
 ## Working with Babel
 #### Installation
