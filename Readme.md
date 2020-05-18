@@ -1,4 +1,4 @@
-# Setting up react repo from scratch
+# Setting up webpack & babel repo from scratch
 
 Things to be covered
 
