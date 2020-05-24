@@ -4,7 +4,6 @@ Things to be covered
 
   - Transpiling js using babel
   - Setting up webpack
-  - Webpack config to get it working with vanilla js
   - Codespliting & Lazy loading
   - Chunks
 
