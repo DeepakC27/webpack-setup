@@ -7,19 +7,20 @@ const __curDir = fs.realpathSync(process.cwd())
 
 const devConfig = {
   mode: "development",
+  entry: [
+    path.resolve(__curDir, 'src/')
+  ],
+  output: {
+    path: path.resolve(__curDir, 'src/'),
+    filename: 'bundle.js'
+  },
   devServer: {
     // serve path on dev server
     contentBase: path.resolve(__curDir, 'public'),
     historyApiFallback: {
       index: path.resolve(__curDir, 'public/index.html')
     }
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      // template to copy index.html into dist folder
-      template: path.resolve(__curDir, 'public/index.html')
-    })
-  ],
+  }
 }
 
 const prodConfig = {
@@ -31,6 +32,9 @@ const prodConfig = {
   },
   mode: "production",
   plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+        // ...
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__curDir, 'public/index.html')
     })

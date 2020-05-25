@@ -27,7 +27,7 @@ const loadersConfig = {
         'style-loader',
         'css-loader',
         'sass-loader',
-      ],
+      ], // sequence matters webpacks start's with last to first sass -> css -> style
     }
   ]
 }

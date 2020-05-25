@@ -1,5 +1,6 @@
 import bike from 'assets/bike.png'
 import './app.scss'
+import './secondary.scss'
 
 export default class App {
   constructor (initalMoney = 0) {
