@@ -3,9 +3,8 @@
 Following are the topic covered in the repo
   - Transpiling js using babel
   - Setting up webpack
-  - Codespliting & Lazy loading
-  - Chunks
-  - Optimizing
+  - Codespliting
+  - Optimizing by minifying
   - Route handling
 
 ## Folder Structure
