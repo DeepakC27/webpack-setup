@@ -1,15 +1,14 @@
 const path = require('path')
 const fs = require('fs')
 const loadersConfig = require('./webpack.loaders')
+const mergeWebpack = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const __curDir = fs.realpathSync(process.cwd())
 
 const devConfig = {
   mode: "development",
-  entry: [
-    path.resolve(__curDir, 'src/')
-  ],
   output: {
     path: path.resolve(__curDir, 'src/'),
     filename: 'bundle.js'
@@ -24,25 +23,23 @@ const devConfig = {
 }
 
 const prodConfig = {
-  entry: './src/index.js',
+  mode: "production",
   output: {
     path: path.resolve(__curDir, 'dist'),
-    filename: 'js/name.[contenthash].js',
-    chunkFilename: 'js/name.[contenthash].js' // determines the name of non-entry chunk files
+    filename: 'js/[name].[contenthash].js', // to update only if file has changes [contenthash]
+    chunkFilename: 'js/[name].[contenthash].js' // determines the name of non-entry chunk files
   },
-  mode: "production",
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-        // ...
-    }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__curDir, 'public/index.html')
+      template: path.resolve(__curDir, 'public/build.html')
     })
-  ],
+  ]
 }
 
 const config = {
-  // entry: './src/index.js',,
+  entry: [
+    path.resolve(__curDir, 'src/')
+  ],
   resolve: {
     alias: {
       // alias for assets path 'assets/[].png'
@@ -50,13 +47,14 @@ const config = {
       assets: path.resolve(__curDir, 'src/assets/')
     }
   },
-  module: loadersConfig
+  ...loadersConfig
 }
 
 module.exports = (() => {
-  if (process.env.MODE === 'prod') {
-    return { ...config, ...prodConfig }
+  console.log('configType: ', process.env.MODE)
+  if (process.env.MODE === 'dev') {
+    return mergeWebpack(config, devConfig)
   } else {
-    return { ...config, ...devConfig }
+    return mergeWebpack(config, prodConfig)
   }
 })()
