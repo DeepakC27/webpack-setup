@@ -1,5 +1,5 @@
 import './index.scss'
 
-const HomePage = '<h1>Home page</h1>'
+const HomePage = `<div class='watermark'>Home page</div>`
 
 export default HomePage

@@ -23,7 +23,10 @@ const RenderPathBtns = () => {
     console.log('error page')
     navOnClick('/error')
   }
+  const seperator = document.createElement('span')
+  seperator.innerHTML = '>'
   root.appendChild(btn1)
+  root.appendChild(seperator)
   root.appendChild(btn2)
 }
 
