@@ -90,7 +90,7 @@ const config = {
   }
 }
 ```
-This is the basic webConfig you can setup for both dev & mode
+This is the basic webConfig you can setup for both dev & prod mode
 - [output][wb-output]
     For prod  hashing is done `js/[name].[contenthash].js` to update only if file has changed
 - [module][wb-module]
