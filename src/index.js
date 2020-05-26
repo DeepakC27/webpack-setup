@@ -1,22 +1,44 @@
 import './main.scss'
+import ErrorPage from './routes/ErrorPage'
+import HomePage from './routes/Home'
 
-const HOME_PAGE = import('./routes/Home').then((module) => module.default)
-const ERROR_PAGE = import('./routes/ErrorPage').then((module) => module.default)
-
-const pathJSMapping = () => {
-  let path = window.location.pathname
-  let jsFile
-  switch (path) {
-    case '/':
-      jsFile = HOME_PAGE
-      break
-    case '/test': ERROR_PAGE
-      break
-  }
-  console.log('fileName: ', jsFile)
-  return jsFile
+const root = document.getElementsByClassName('root')[0]
+const ROUTES = {
+  '/': HomePage,
+  '/error': ErrorPage
 }
 
-const mappedJSFile = pathJSMapping()
+const RenderPathBtns = () => {
+  const btn1 = document.createElement('button')
+  const btn2 = document.createElement('button')
+  btn1.innerHTML = 'Home Page'
+  btn1.setAttribute('class', 'nav-path-btn')
+  btn2.innerHTML = 'Error Page'
+  btn2.setAttribute('class', 'nav-path-btn')
+  btn1.onclick = () => {
+    console.log('home page')
+    navOnClick('/')
+  }
+  btn2.onclick = () => {
+    console.log('error page')
+    navOnClick('/error')
+  }
+  root.appendChild(btn1)
+  root.appendChild(btn2)
+}
 
-export default mappedJSFile
+const renderContent = (pathName) => {
+  root.innerHTML = ROUTES[pathName || window.location.pathname]
+  RenderPathBtns()
+}
+
+const navOnClick = (pathName) => {
+  window.history.pushState({}, pathName, window.location.origin + pathName)
+  renderContent(pathName)
+}
+
+window.onpopstate = () => {
+  renderContent()
+}
+
+renderContent()

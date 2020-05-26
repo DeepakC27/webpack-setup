@@ -2,3 +2,22 @@ body {
   font-family: monospace;
   font-size: 18px;
 }
+
+body > div > img {
+  height: 50px;
+  width: 50px;
+}
+
+h1 {
+  color: grey;
+  text-align: center;
+}
+
+.nav-path-btn {
+  padding: 1rem 0;
+  font-size: inherit;
+  display: block;
+  margin: 1rem 0;
+  width: 250px;
+  outline: none;
+}
