@@ -4,6 +4,8 @@ const loadersConfig = require('./webpack.loaders')
 const mergeWebpack = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSPlugin = require("optimize-css-assets-webpack-plugin")
+const TerserPlugin = require("terser-webpack-plugin")
 
 const __curDir = fs.realpathSync(process.cwd())
 console.log('__curDir', __curDir)
@@ -12,7 +14,7 @@ const devConfig = {
   mode: 'development',
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__curDir, 'src/'),
+    path: path.resolve(__curDir, 'src/')
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -39,10 +41,21 @@ const prodConfig = {
     path: path.resolve(__curDir, 'dist'),
     filename: 'js/[name].[contenthash].js', // to update only if file has changes [contenthash]
   },
+  optimization: {
+    minimizer: [
+      new OptimizeCSSPlugin(),
+      new TerserPlugin(), // to minify JS as we override minimizer
+      new HtmlWebpackPlugin({
+        template: path.resolve(__curDir, 'public/build.html'),
+        minify: {
+          removeAttributeQuotes: true,
+          collapseWhitespace: true,
+          removeComments: true
+        }
+      }) // to minify html file
+    ]
+  },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__curDir, 'public/build.html')
-    }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     // only for prod as we don't want any css changes to be recompiled & bundled into a new file in devmode
   ],
