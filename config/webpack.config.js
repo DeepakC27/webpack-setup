@@ -3,31 +3,28 @@ const fs = require('fs')
 const loadersConfig = require('./webpack.loaders')
 const mergeWebpack = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const __curDir = fs.realpathSync(process.cwd())
+console.log('__curDir', __curDir)
 
 const devConfig = {
-  mode: "development",
+  mode: 'development',
   output: {
+    filename: '[name].bundle.js',
     path: path.resolve(__curDir, 'src/'),
-    filename: 'bundle.js'
   },
-  devServer: {
-    // serve path on dev server
-    contentBase: path.resolve(__curDir, 'public'),
-    historyApiFallback: {
-      index: path.resolve(__curDir, 'public/index.html')
-    }
-  }
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__curDir, 'public/index.html')
+    })
+  ]
 }
 
 const prodConfig = {
-  mode: "production",
+  mode: 'production',
   output: {
     path: path.resolve(__curDir, 'dist'),
     filename: 'js/[name].[contenthash].js', // to update only if file has changes [contenthash]
-    chunkFilename: 'js/[name].[contenthash].js' // determines the name of non-entry chunk files
   },
   plugins: [
     new HtmlWebpackPlugin({

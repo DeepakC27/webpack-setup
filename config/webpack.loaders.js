@@ -1,7 +1,6 @@
 const path = require('path')
 const fs = require('fs')
 const __curDir = fs.realpathSync(process.cwd())
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const loadersConfig = {
   module: {
@@ -20,12 +19,20 @@ const loadersConfig = {
         }
       }, {
         test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[hash].[ext]',
+            outputPath: 'assets'
+          }
+        }
       }, {
-        test: /\.(scss|css)$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.scss$/,
+        use: [
+          'style-loader', // 3. injects js strings into DOM
+          'css-loader', // 2. Converts css to js strings (css as js string)
+          'sass-loader' // 1. Converts scss into css
+        ]
       }
     ]
   }
