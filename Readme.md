@@ -6,6 +6,29 @@ Things to be covered
   - Setting up webpack
   - Codespliting & Lazy loading
   - Chunks
+  
+## Folder Structure
+```
+.
+├── config                      # Webpack configs
+│   └── webpack.config.js       
+│   └── bwebpack.loaders.js     
+├── public                      # HTML templates
+│   └── build.html              
+│   └── index.html              
+├── src                     
+│   ├── assets                          
+│   ├── routes
+│   │   ├── index.js            #  Route based handling
+│   │   ├── main.scss           #  Root styles
+│   │   ├── HomePage             
+│   │   │   ├── index.js     
+│   │   │   ├── index.scss  
+│   │   └── Error Page       
+│   │       ├── index.js    
+│   │   │   ├── index.scss 
+│   ├── .babel.rc   
+```
 
 ## Working with Babel
 #### Installation
@@ -83,11 +106,3 @@ devConfig = {
   ]
 }
 ```
-
-
-
-*Table*
-
-| Heading | Heading |
-| ------ | ------ |
-| Content | Content |
