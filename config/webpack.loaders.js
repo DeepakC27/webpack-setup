@@ -29,13 +29,6 @@ const loadersConfig = {
             outputPath: 'assets'
           }
         }
-      }, {
-        test: /\.scss$/,
-        use: [
-          'style-loader', // 3. injects js strings into DOM
-          'css-loader', // 2. Converts css to js strings (css as js string)
-          'sass-loader' // 1. Converts scss into css
-        ]
       }
     ]
   }

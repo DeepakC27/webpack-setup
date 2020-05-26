@@ -3,6 +3,7 @@ const fs = require('fs')
 const loadersConfig = require('./webpack.loaders')
 const mergeWebpack = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const __curDir = fs.realpathSync(process.cwd())
 console.log('__curDir', __curDir)
@@ -17,7 +18,19 @@ const devConfig = {
     new HtmlWebpackPlugin({
       template: path.resolve(__curDir, 'public/index.html')
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader', // 3. injects js strings into DOM
+          'css-loader', // 2. Converts css to js strings (css as js string)
+          'sass-loader' // 1. Converts scss into css
+        ]
+      }
+    ]
+  }
 }
 
 const prodConfig = {
@@ -29,8 +42,20 @@ const prodConfig = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__curDir, 'public/build.html')
-    })
-  ]
+    }),
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
+    // only for prod as we don't want any css changes to be recompiled & bundled into a new file in devmode
+  ],
+  module: {
+    rules : [{
+      test: /\.(scss|css)$/i,
+      use: [
+        MiniCssExtractPlugin.loader, // 3. Extract css files
+        'css-loader', // 2. Converts css to js strings (css as js string)
+        'sass-loader' // 1. Converts scss into css
+      ]
+    }]
+  }
 }
 
 const config = {
