@@ -104,8 +104,7 @@ This is the basic webConfig you can setup for both dev & mode
  Plugin used in the code
     - HtmlWebpackPlugin (for html template)
     - MiniCssExtractPlugin (For minifying css)
-- [optimization][wb-optmization]
- Don't have to use if you dont want to minify css as when overrid all the default properties need to be specified again.
+- [optimization][wb-optmization] 
     - OptimizeCSSPlugin
     - TerserPlugin (minify JS)
     - HtmlWebpackPlugin (minify html)
@@ -117,7 +116,7 @@ const mergeWebpack = require('webpack-merge')
 mergeWebpack(config, devConfig)
 ```
   
-### Route handing in vanialla JS
+## Route handing in vanialla JS
 | Path | File |
 | ------ | ------ |
 | '/' | HomePage |
