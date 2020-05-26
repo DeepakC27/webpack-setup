@@ -1,6 +1,4 @@
-import bike from 'assets/bike.png'
-import './app.scss'
-import './secondary.scss'
+import bike from '../../assets/bike.png'
 
 export default class App {
   constructor (initalMoney = 0) {

@@ -1,19 +1,16 @@
-// import layoutFile from './routes'
-// import testFile from './routes/test'
-const MAIN = import('./routes').then((module) => module.default)
+import './main.scss'
 
-const TEST = import('./routes').then((module) => module.default)
+const HOME_PAGE = import('./routes/Home').then((module) => module.default)
+const ERROR_PAGE = import('./routes/ErrorPage').then((module) => module.default)
 
 const pathJSMapping = () => {
   let path = window.location.pathname
   let jsFile
   switch (path) {
     case '/':
-      jsFile = MAIN
+      jsFile = HOME_PAGE
       break
-    case '/test': import('./routes/test').then(module => {
-      jsFile = TEST
-    })
+    case '/test': ERROR_PAGE
       break
   }
   console.log('fileName: ', jsFile)
