@@ -4,8 +4,8 @@ const loadersConfig = require('./webpack.loaders')
 const mergeWebpack = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSPlugin = require("optimize-css-assets-webpack-plugin")
-const TerserPlugin = require("terser-webpack-plugin")
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const __curDir = fs.realpathSync(process.cwd())
 console.log('__curDir', __curDir)
@@ -14,7 +14,8 @@ const devConfig = {
   mode: 'development',
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__curDir, 'src/')
+    path: path.resolve(__curDir, 'src/'),
+    chunkFilename: '[name].bundle.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -40,6 +41,7 @@ const prodConfig = {
   output: {
     path: path.resolve(__curDir, 'dist'),
     filename: 'js/[name].[contenthash].js', // to update only if file has changes [contenthash]
+    chunkFilename: '[name].chunk.js'
   },
   optimization: {
     minimizer: [
