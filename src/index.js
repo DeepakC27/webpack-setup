@@ -47,4 +47,6 @@ const navOnClick = (pathName) => {
   renderContent(pathName)
 }
 
+window.onpopstate = renderContent
+
 renderContent()
