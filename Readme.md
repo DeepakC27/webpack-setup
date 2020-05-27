@@ -100,7 +100,6 @@ This is the basic webConfig you can setup for both dev & prod mode
     - html-loader
     - file-loader
 - [plugins][wb-plugin]
- Plugin used in the code
     - HtmlWebpackPlugin (for html template)
     - MiniCssExtractPlugin (For minifying css)
 - [optimization][wb-optmization]
