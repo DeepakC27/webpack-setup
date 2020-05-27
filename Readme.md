@@ -3,8 +3,9 @@
 Following are the topic covered in the repo
   - Transpiling js using babel
   - Setting up webpack
-  - Codespliting
-  - Optimizing by minifying
+  - [Code Spliting] [wb-codeSpliting]
+  - Dynamic Import
+  - Optimizing
   - Route handling
 
 ## Folder Structure
@@ -26,7 +27,7 @@ Following are the topic covered in the repo
 │   │   │   ├── index.scss  
 │   │   └── Error Page       
 │   │       ├── index.js    
-│   │   │   ├── index.scss 
+│   │   │   ├── index.scss
 │   ├── .babel.rc   
 ```
 
@@ -96,14 +97,13 @@ This is the basic webConfig you can setup for both dev & prod mode
     Used minimun set of plugins req to getting started with vanilla JS
     - Babel
     - Scss (optional)
-     ** In the config used in dev i have inject styles directly into html file whereas in in prod it is minified & imported  using diff css file. Bcse in dev recompiling & bundling takes more time rather than directly injecting the styles.
     - html-loader
     - file-loader
 - [plugins][wb-plugin]
  Plugin used in the code
     - HtmlWebpackPlugin (for html template)
     - MiniCssExtractPlugin (For minifying css)
-- [optimization][wb-optmization] 
+- [optimization][wb-optmization]
     - OptimizeCSSPlugin
     - TerserPlugin (minify JS)
     - HtmlWebpackPlugin (minify html)
@@ -114,14 +114,33 @@ Common loaders are keps seperatly in diff file & to merge as per the env
 const mergeWebpack = require('webpack-merge')
 mergeWebpack(config, devConfig)
 ```
-  
+
+#### Code Spliting
+In the repo both node_modules & components logic are bundled separately. This helps in reducing load time. When Both bundled together change in the components logic will result in chunk with diff hash name & when done separately node_modules chunk will have same hash name so will be picked from cache (if cached)
+    
+#### Dynamic Import
+  Dynamically loading chunks to reduce inital load time.
+  i.e
+  ```
+  import(/* webpackChunkName: 'errorPage' */'./routes/ErrorPage')
+  .then(({ default: module }) => {
+    root.innerHTML = module
+    RenderPathBtns()
+  })
+  .catch(err => console.error('err: ', err))
+  ```
+  You can find more about dynamic `import` [here][dyimport]
+
+#### Optimizing
+  For optimization css, html & js are minified. For dev we are injecting styles directly into html file whereas in in prod it is minified & imported using diff css file. Bcse in dev recompiling & bundling takes more time rather than directly injecting the styles.
+
 ## Route handing in vanialla JS
 | Path | File |
 | ------ | ------ |
 | '/' | HomePage |
 | '/error' | ErrorPage |
 
-Used onpopState to  re-render the content based on the updated path.
+Used onpopState to re-render the content based on the updated path.
 ```
 const renderContent = (pathName) => {
   root.innerHTML = ROUTES[pathName || window.location.pathname]
@@ -139,4 +158,6 @@ window.onpopstate = () => renderContent
 [wb-plugin]: https://webpack.js.org/plugins/
 [wb-module]: https://webpack.js.org/configuration/module/
 [wb-output]: https://webpack.js.org/configuration/output/
+[wb-codeSpliting]: https://webpack.js.org/guides/code-splitting/
 [wb-optmization]: https://webpack.js.org/configuration/optimization/
+[dyimport]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
