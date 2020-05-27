@@ -1,4 +1,4 @@
-# Setting up webpack & babel repo from scratch
+# Setting up webpack from scratch for vanilla JS
 
 Following are the topic covered
   - Transpiling js using babel
