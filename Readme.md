@@ -3,7 +3,7 @@
 Following are the topic covered
   - Transpiling js using babel
   - Setting up webpack
-  - [Code Spliting][wb-codeSpliting]
+  - [Code Splitting][wb-codeSplitting]
   - Dynamic Import
   - Optimizing
   - Route handling
@@ -39,9 +39,9 @@ Following are the topic covered
 npm i --save-dev @babel/cli @babel/core
 npm i --save-dev @babel/plugin-proposal-class-properties @babel/plugin-transform-arrow-functions
 ```
-Basic plugins installted for the conversions
+Basic plugins installed for the conversions
 #### Setup
-create .babelrc file to add installted plugins
+create .babelrc file to add installed plugins
 #### To run server
 ```
 npm i --save-dev live-server
@@ -49,7 +49,7 @@ live-server /public
 ```
 
 #### Babel Info
-Transpiles js to lower verions of js for browser to understand
+Transpiles js to lower versions of js for browser to understand
 i.g
 ES6
 `const load = () => { console.log('add entry point') }`
@@ -108,18 +108,18 @@ This is the basic webConfig you can setup for both dev & prod mode
     - TerserPlugin (minify JS)
     - HtmlWebpackPlugin (minify html)
 
-Common loaders are keps seperatly in diff file & to merge as per the env
+Common loaders are keps separately in diff file & to merge as per the env
 `webpack-merge` is used.
 ```
 const mergeWebpack = require('webpack-merge')
 mergeWebpack(config, devConfig)
 ```
 
-#### Code Spliting
+#### Code Splitting
 In the repo both node_modules & components logic are bundled separately. This helps in reducing load time. When Both bundled together change in the components logic will result in chunk with diff hash name & when done separately node_modules chunk will have same hash name so will be picked from cache (if cached)
-    
+
 #### Dynamic Import
-  Dynamically loading chunks to reduce inital load time.
+  Dynamically loading chunks to reduce initial load time.
   i.e
   ```
   import(/* webpackChunkName: 'errorPage' */'./routes/ErrorPage')
@@ -132,7 +132,7 @@ In the repo both node_modules & components logic are bundled separately. This he
   You can find more about dynamic `import` [here][dyimport]
 
 #### Optimizing
-  For optimization css, html & js are minified. For dev we are injecting styles directly into html file whereas in in prod it is minified & imported using diff css file. Bcse in dev recompiling & bundling takes more time rather than directly injecting the styles.
+  For optimization css, html & js are minified. For dev we are injecting styles directly into html file whereas in in prod it is minified & imported using diff css file. As in dev recompiling & bundling takes more time rather than directly injecting the styles.
 
 ## Route handing in vanialla JS
 | Path | File |
