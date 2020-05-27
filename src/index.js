@@ -1,12 +1,6 @@
 import './main.scss'
-import ErrorPage from './routes/ErrorPage'
-import HomePage from './routes/Home'
-
+import HomePage from './routes/HomePage'
 const root = document.getElementsByClassName('root')[0]
-const ROUTES = {
-  '/': HomePage,
-  '/error': ErrorPage
-}
 
 const RenderPathBtns = () => {
   const btn1 = document.createElement('button')
@@ -31,17 +25,26 @@ const RenderPathBtns = () => {
 }
 
 const renderContent = (pathName) => {
-  root.innerHTML = ROUTES[pathName || window.location.pathname]
-  RenderPathBtns()
+  let path = pathName || window.location.pathname
+  if (path === '/error') {
+    import(/* webpackChunkName: 'errorPage' */'./routes/ErrorPage')
+    .then(({ default: module }) => {
+      root.innerHTML = module
+      RenderPathBtns()
+    })
+    .catch(err => console.error('err: ', err))
+  } else {
+    root.innerHTML = HomePage
+    RenderPathBtns()
+  }
 }
 
 const navOnClick = (pathName) => {
+  if (pathName === window.location.pathname) {
+    return
+  }
   window.history.pushState({}, pathName, window.location.origin + pathName)
   renderContent(pathName)
-}
-
-window.onpopstate = () => {
-  renderContent()
 }
 
 renderContent()
