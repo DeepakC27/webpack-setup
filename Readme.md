@@ -1,11 +1,36 @@
 # Setting up webpack & babel repo from scratch
 
-Things to be covered
-
+Following are the topic covered in the repo
   - Transpiling js using babel
   - Setting up webpack
-  - Codespliting & Lazy loading
-  - Chunks
+  - Codespliting
+  - Optimizing by minifying
+  - Route handling
+
+## Folder Structure
+```
+.
+├── config                      # Webpack configs
+│   └── webpack.config.js       
+│   └── bwebpack.loaders.js     
+├── public                      # HTML templates
+│   └── build.html              
+│   └── index.html              
+├── src                     
+│   ├── assets                          
+│   ├── routes
+│   │   ├── index.js            #  Route based handling
+│   │   ├── main.scss           #  Root styles
+│   │   ├── HomePage             
+│   │   │   ├── index.js     
+│   │   │   ├── index.scss  
+│   │   └── Error Page       
+│   │       ├── index.js    
+│   │   │   ├── index.scss 
+│   ├── .babel.rc   
+```
+
+
 
 ## Working with Babel
 #### Installation
@@ -53,41 +78,65 @@ npm i --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin
 #### Setup
 Create webpack.config.js
 ```
-// build config
-prodconfig = {
-    mode: 'production',
-    entry: './src/index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'main.js'
-     },
-    module: {
-        rules: [
-          // babel-loader....
-        ]
-    }
+const config = {
+  mode: 'development' || 'production',
+  entry: 'entry file',
+  output: 'output file',
+  optimization: { minimizer: [] }
+  plugins: [],
+  module: {
+    rules: []
+  }
+}
+```
+This is the basic webConfig you can setup for both dev & prod mode
+- [output][wb-output]
+    For prod  hashing is done `js/[name].[contenthash].js` to update only if file has changed
+- [module][wb-module]
+    Used minimun set of plugins req to getting started with vanilla JS
+    - Babel
+    - Scss (optional)
+     ** In the config used in dev i have inject styles directly into html file whereas in in prod it is minified & imported  using diff css file. Bcse in dev recompiling & bundling takes more time rather than directly injecting the styles.
+    - html-loader
+    - file-loader
+- [plugins][wb-plugin]
+ Plugin used in the code
+    - HtmlWebpackPlugin (for html template)
+    - MiniCssExtractPlugin (For minifying css)
+- [optimization][wb-optmization] 
+    - OptimizeCSSPlugin
+    - TerserPlugin (minify JS)
+    - HtmlWebpackPlugin (minify html)
+
+Common loaders are keps seperatly in diff file & to merge as per the env
+`webpack-merge` is used.
+```
+const mergeWebpack = require('webpack-merge')
+mergeWebpack(config, devConfig)
+```
+  
+## Route handing in vanialla JS
+| Path | File |
+| ------ | ------ |
+| '/' | HomePage |
+| '/error' | ErrorPage |
+
+Used onpopState to  re-render the content based on the updated path.
+```
+const renderContent = (pathName) => {
+  root.innerHTML = ROUTES[pathName || window.location.pathname]
 }
 
-// dev server config
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-devConfig = {
-    mode: 'development',
-    devServer: {
-      contentBase: path.resolve(__dirname, 'public'),  
-    },
-    plugins: [
-    new HtmlWebpackPlugin({
-      // template to copy index.html into dist folder
-      template: path.resolve(__dirname, 'public/index.html')
-    })
-  ]
+const navOnClick = (pathName) => {
+  window.history.pushState({}, pathName, window.location.origin + pathName)
+  renderContent(pathName)
 }
+
+window.onpopstate = () => renderContent
 ```
 
 
-
-*Table*
-
-| Heading | Heading |
-| ------ | ------ |
-| Content | Content |
+[wb-plugin]: https://webpack.js.org/plugins/
+[wb-module]: https://webpack.js.org/configuration/module/
+[wb-output]: https://webpack.js.org/configuration/output/
+[wb-optmization]: https://webpack.js.org/configuration/optimization/
