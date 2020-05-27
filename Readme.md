@@ -1,9 +1,9 @@
 # Setting up webpack & babel repo from scratch
 
-Following are the topic covered in the repo
+Following are the topic covered
   - Transpiling js using babel
   - Setting up webpack
-  - [Code Spliting] [wb-codeSpliting]
+  - [Code Spliting][wb-codeSpliting]
   - Dynamic Import
   - Optimizing
   - Route handling
