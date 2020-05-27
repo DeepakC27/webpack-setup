@@ -69,7 +69,7 @@ const prodConfig = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
+    new MiniCssExtractPlugin({ filename: 'styles/[name].[contenthash].css' }),
     // only for prod as we don't want any css changes to be recompiled & bundled into a new file in devmode
   ],
   module: {
