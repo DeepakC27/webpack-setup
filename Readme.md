@@ -1,7 +1,7 @@
 # Setting up webpack from scratch
 
 Following are the topic covered
-  - Transpiling js using babel
+  - Transpiling js using [babel][babel]
   - Setting up webpack
   - [Code Splitting][wb-codeSplitting]
   - Dynamic Import
@@ -153,7 +153,7 @@ const navOnClick = (pathName) => {
 window.onpopstate = () => renderContent
 ```
 
-
+[babel]: https://babeljs.io/docs/en/
 [wb-plugin]: https://webpack.js.org/plugins/
 [wb-module]: https://webpack.js.org/configuration/module/
 [wb-output]: https://webpack.js.org/configuration/output/
