@@ -41,9 +41,20 @@ const prodConfig = {
   output: {
     path: path.resolve(__curDir, 'dist'),
     filename: 'js/[name].[contenthash].js', // to update only if file has changes [contenthash]
-    chunkFilename: '[name].chunk.js'
+    chunkFilename: 'js/[name].[contenthash].js'
   },
   optimization: {
+    moduleIds: 'hashed',
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
     minimizer: [
       new OptimizeCSSPlugin(),
       new TerserPlugin(), // to minify JS as we override minimizer
