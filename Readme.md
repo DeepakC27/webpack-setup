@@ -158,6 +158,6 @@ window.onpopstate = () => renderContent
 [wb-plugin]: https://webpack.js.org/plugins/
 [wb-module]: https://webpack.js.org/configuration/module/
 [wb-output]: https://webpack.js.org/configuration/output/
-[wb-codeSpliting]: https://webpack.js.org/guides/code-splitting/
+[wb-codeSplitting]: https://webpack.js.org/guides/code-splitting/
 [wb-optmization]: https://webpack.js.org/configuration/optimization/
 [dyimport]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
