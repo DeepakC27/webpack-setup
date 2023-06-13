@@ -133,7 +133,7 @@ In the repo both node_modules & components logic are bundled separately. This he
 #### Optimizing
   For optimization css, html & js are minified. For dev we are injecting styles directly into html file whereas in in prod it is minified & imported using diff css file. As in dev recompiling & bundling takes more time rather than directly injecting the styles.
 
-## Route handing in vanialla JS
+## Route handing in vanilla JS
 | Path | File |
 | ------ | ------ |
 | '/' | HomePage |
